@@ -9,6 +9,7 @@ public class WebServiceTest {
 		TestController testController = new TestController(NUM_OF_PARALLEL_TESTS, MAX_NUMBER_REQUESTS, HOST_NAME);
 		testController.start();
 		testController.join();
+		testController.stats();
 	}
 
 }

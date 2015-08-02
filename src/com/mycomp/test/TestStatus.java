@@ -51,5 +51,10 @@ public class TestStatus {
 		RequestStatus req = new RequestStatus(reqNumber, responseTime);
 		this.reqStatus.add(req);
 	}
-
+	public void print() {
+		System.out.println("Num of Requests: " + this.numRequests);
+		System.out.println("Num of Success: " + this.numSuccess);
+		System.out.println("Num of 4XX errors: " + this.num4XXRequests);
+		System.out.println("Num of 5XX errors: " + this.num5XXRequests);
+	}
 }

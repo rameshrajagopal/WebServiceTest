@@ -33,7 +33,7 @@ public class WorkerThread extends Thread{
 				this.status.addRequest(3, i, 0);
 			} else {
 				//process the response and get the e-mail id and uuid
-				System.out.println(t.getName() + " POST");
+				
 				this.status.addRequest(1, i, 0);
 				response = this.client.handleHttpPOSTMessage("index", "uuid");
 				if (response.equals("4XX")) {

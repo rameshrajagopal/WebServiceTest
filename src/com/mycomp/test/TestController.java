@@ -73,7 +73,12 @@ public class TestController {
 		this.threadPool.start();
 	}
 	public void stats() {
-		
+		for (int i = 0; i < this.numParallel; ++i) {
+			System.out.println("Thread Info: " + i);
+		    TestStatus status = this.statusArray.get(i);
+			status.print();
+			System.out.println();
+		}
 	}
 	public void join() {
 		this.threadPool.join();

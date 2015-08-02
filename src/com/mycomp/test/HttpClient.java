@@ -37,7 +37,7 @@ public class HttpClient {
 			} else if(responseCode >= 500 && responseCode < 600) {
 				return "5XX";
 			} //FIXME yet to handle other error codes
-			System.out.println("Response Code: " + responseCode);
+			//System.out.println("Response Code: " + responseCode);
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String line;
 			StringBuffer response = new StringBuffer();
@@ -76,7 +76,7 @@ public class HttpClient {
 			} else if(responseCode >= 500 && responseCode < 600) {
 				return "5XX";
 			} //FIXME yet to handle other error codes
-			System.out.println("Response Code: " + responseCode);
+			//System.out.println("Response Code: " + responseCode);
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String line;
 			StringBuffer response = new StringBuffer();
