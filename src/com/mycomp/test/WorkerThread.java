@@ -22,9 +22,9 @@ public class WorkerThread extends Thread{
 	}
 	
 	private void testServerAPI() {
-		Thread t = Thread.currentThread();
+		//Thread t = Thread.currentThread();
 		long startTime, endTime;
-		System.out.println("Thread ID : " + t.getName());
+		//System.out.println("Thread ID : " + t.getName());
 		for (int i = 0; i < this.numIterations * 2; i += 1) {
 			String response, uuid;
 			String email = "mail2.rameshr@gmail.com";

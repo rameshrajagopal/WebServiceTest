@@ -20,7 +20,7 @@ public class JsonParser {
 			e.printStackTrace();
 		}
 		String jsonText = out.toString();
-		System.out.println("Encode JsonParser: " + jsonText);
+		//System.out.println("Encode JsonParser: " + jsonText);
 		return jsonText;
 	}
 	public static void decodeMessage(String response, String[] ret) {
@@ -31,7 +31,7 @@ public class JsonParser {
 			JSONObject jsonObject = (JSONObject)object;
 			ret[0] = (String)jsonObject.get("emailId");
 			ret[1] = (String)jsonObject.get("uuid");
-			System.out.println("Decoding: " + ret[0] + " " + ret[1]);
+			//System.out.println("Decoding: " + ret[0] + " " + ret[1]);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
