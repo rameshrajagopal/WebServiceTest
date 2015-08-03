@@ -23,25 +23,32 @@ public class WorkerThread extends Thread{
 	
 	private void testServerAPI() {
 		Thread t = Thread.currentThread();
-		System.out.print("Thread ID : " + t.getName());
+		long startTime, endTime;
+		System.out.println("Thread ID : " + t.getName());
 		for (int i = 0; i < this.numIterations * 2; i += 1) {
-			String response;
-			response = this.client.handleHttpGETMessage("index");
+			String response, uuid;
+			String email = "mail2.rameshr@gmail.com";
+			
+			startTime = System.nanoTime();
+			response = this.client.handleHttpGETMessage("index", email);
+			endTime = System.nanoTime();
 			if (response.equals("4XX")) {
-				this.status.addRequest(2, 1, 0);
+				this.status.addRequest(2, 1, endTime - startTime);
 			} else if(response.equals("5XX")) {
-				this.status.addRequest(3, i, 0);
+				this.status.addRequest(3, i, endTime - startTime);
 			} else {
 				//process the response and get the e-mail id and uuid
-				
-				this.status.addRequest(1, i, 0);
-				response = this.client.handleHttpPOSTMessage("index", "uuid");
+				uuid = response;
+				this.status.addRequest(1, i, endTime - startTime);
+				startTime = System.nanoTime();
+				response = this.client.handleHttpPOSTMessage("index", email, uuid);
+				endTime = System.nanoTime();
 				if (response.equals("4XX")) {
-					this.status.addRequest(2, i+1, 0);
+					this.status.addRequest(2, i+1, endTime - startTime);
 				} else if (response.equals("5XX")) {
-					this.status.addRequest(3, i+1, 0);
+					this.status.addRequest(3, i+1, endTime - startTime);
 				} else {
-					this.status.addRequest(1, i+1, 0);
+					this.status.addRequest(1, i+1, endTime - startTime);
 				}
 			}
 		}

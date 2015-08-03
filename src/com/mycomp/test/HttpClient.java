@@ -17,9 +17,10 @@ public class HttpClient {
 	public HttpClient(String hostName) {
 		this.hostName = hostName;
 	}
-	public String handleHttpGETMessage(String uri) {
+	public String handleHttpGETMessage(String uri, String email) {
 		
 	    String url = "http://" + this.hostName + "/" + uri;
+	    String[] msgInfo = {null, null};
 		
 		URL urlobj = null;
 		try {
@@ -31,6 +32,7 @@ public class HttpClient {
 		try {
 			HttpURLConnection con = (HttpURLConnection) urlobj.openConnection();
 			con.setRequestMethod("GET");
+			con.addRequestProperty("X-Surya-Email-Id", email);
 			int responseCode = con.getResponseCode();
 			if (responseCode >= 400 && responseCode < 500) {
 				return "4XX";
@@ -44,16 +46,17 @@ public class HttpClient {
 			while ((line = in.readLine()) != null) {
 				response.append(line);
 			}
-			return response.toString();
+			JsonParser.decodeMessage(response.toString(), msgInfo);
+			return msgInfo[1];
 		}
 		catch(IOException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	public String handleHttpPOSTMessage(String uri, String uuid) {
+	public String handleHttpPOSTMessage(String uri, String email, String uuid) {
 		String url = "http://" + this.hostName + "/" + uri;
-		String urlParameters = "";
+		String urlParameters = JsonParser.encodeMessage(email, uuid);
 		
 		URL urlobj = null;
 		try {
@@ -83,6 +86,7 @@ public class HttpClient {
 			while ((line = in.readLine()) != null) {
 				response.append(line);
 			}
+			//System.out.println(response.toString());
 			return response.toString();
 		}
 		catch(IOException e) {

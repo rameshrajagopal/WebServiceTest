@@ -56,5 +56,10 @@ public class TestStatus {
 		System.out.println("Num of Success: " + this.numSuccess);
 		System.out.println("Num of 4XX errors: " + this.num4XXRequests);
 		System.out.println("Num of 5XX errors: " + this.num5XXRequests);
+		System.out.println("Requests Info: ");
+		for (int i = 0; i < this.numRequests; ++i) {
+			RequestStatus reqStatus = this.reqStatus.get(i);
+			System.out.println(reqStatus.requestNumber + " " + reqStatus.responseTime);
+		}
 	}
 }
