@@ -10,16 +10,18 @@ import java.net.URL;
 
 public class HttpClient {
 	private String hostName;
+	private String uriName;
 	
 	public HttpClient() {
 		
 	}
-	public HttpClient(String hostName) {
+	public HttpClient(String hostName, String uriName) {
 		this.hostName = hostName;
+		this.uriName = uriName;
 	}
-	public String handleHttpGETMessage(String uri, String email) {
+	public String handleHttpGETMessage(String email) {
 		
-	    String url = "http://" + this.hostName + "/" + uri;
+	    String url = "http://" + this.hostName + "/" + this.uriName;
 	    String[] msgInfo = {null, null};
 		
 		URL urlobj = null;
@@ -54,8 +56,8 @@ public class HttpClient {
 		}
 		return null;
 	}
-	public String handleHttpPOSTMessage(String uri, String email, String uuid) {
-		String url = "http://" + this.hostName + "/" + uri;
+	public String handleHttpPOSTMessage(String email, String uuid) {
+		String url = "http://" + this.hostName + "/" + this.uriName;
 		String urlParameters = JsonParser.encodeMessage(email, uuid);
 		
 		URL urlobj = null;

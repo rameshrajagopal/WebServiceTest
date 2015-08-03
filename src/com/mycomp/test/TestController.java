@@ -6,6 +6,7 @@ public class TestController {
 	private int numParallel;
 	private int maxNumIterations;
 	private String hostName;
+	private String uriName;
 	private ThreadPool threadPool;
 	private ArrayList<TestStatus> statusArray;
 	private ArrayList<HttpClient> clients;
@@ -14,16 +15,17 @@ public class TestController {
 		
 	}
 	public TestController(int numParallel, int maxNumIterations,
-			String hostName) {
+			String hostName, String uriName) {
 		this.numParallel = numParallel;
 		this.maxNumIterations = maxNumIterations;
 		this.hostName = hostName;
+		this.uriName = uriName;
 		statusArray = new ArrayList<TestStatus>();
 		clients = new ArrayList<HttpClient>();
 		for (int i = 0; i < numParallel; ++i) {
 			TestStatus status = new TestStatus();
 			statusArray.add(status);
-			HttpClient client = new HttpClient(hostName);
+			HttpClient client = new HttpClient(hostName, uriName);
 			clients.add(client);
 		}
 		int numIterations = maxNumIterations/numParallel;
@@ -74,7 +76,6 @@ public class TestController {
 	}
 	public void stats() {
 		for (int i = 0; i < this.numParallel; ++i) {
-			System.out.println("Thread Info: " + i);
 		    TestStatus status = this.statusArray.get(i);
 			status.print();
 			System.out.println();

@@ -30,7 +30,7 @@ public class WorkerThread extends Thread{
 			String email = "mail2.rameshr@gmail.com";
 			
 			startTime = System.nanoTime();
-			response = this.client.handleHttpGETMessage("index", email);
+			response = this.client.handleHttpGETMessage(email);
 			endTime = System.nanoTime();
 			if (response.equals("4XX")) {
 				this.status.addRequest(2, 1, endTime - startTime);
@@ -41,7 +41,7 @@ public class WorkerThread extends Thread{
 				uuid = response;
 				this.status.addRequest(1, i, endTime - startTime);
 				startTime = System.nanoTime();
-				response = this.client.handleHttpPOSTMessage("index", email, uuid);
+				response = this.client.handleHttpPOSTMessage(email, uuid);
 				endTime = System.nanoTime();
 				if (response.equals("4XX")) {
 					this.status.addRequest(2, i+1, endTime - startTime);
